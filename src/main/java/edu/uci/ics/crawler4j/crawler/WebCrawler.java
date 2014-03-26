@@ -50,6 +50,7 @@ public class WebCrawler implements Runnable {
 	protected int myId;
 
 	/**
+	 * 爬行控制器 监听各个爬虫的运行状态并向URL队列添加新的URL
 	 * The controller instance that has created this crawler thread. This
 	 * reference to the controller can be used for getting configurations of the
 	 * current crawl or adding new seeds during runtime.
@@ -62,6 +63,7 @@ public class WebCrawler implements Runnable {
 	private Thread myThread;
 
 	/**
+	 * 
 	 * The parser that is used by this crawler instance to parse the content of
 	 * the fetched pages.
 	 */
@@ -100,11 +102,12 @@ public class WebCrawler implements Runnable {
 	private boolean isWaitingForNewURLs;
 
 	/**
+	 * 初始化爬虫
 	 * Initializes the current instance of the crawler
 	 * 
-	 * @param myId
+	 * @param myId 爬虫ID
 	 *            the id of this crawler instance
-	 * @param crawlController
+	 * @param crawlController 爬虫控制器
 	 *            the controller that manages this crawling session
 	 */
 	public void init(int myId, CrawlController crawlController) {
@@ -132,6 +135,7 @@ public class WebCrawler implements Runnable {
 	}
 
 	/**
+	 * 爬虫运行前执行，可用于初始化数据结构，或其他爬虫所需的实例。
 	 * This function is called just before starting the crawl by this crawler
 	 * instance. It can be used for setting up the data structures or
 	 * initializations needed by this crawler instance.
@@ -140,6 +144,7 @@ public class WebCrawler implements Runnable {
 	}
 
 	/**
+	 * 爬虫实例结束前调用
 	 * This function is called just before the termination of the current
 	 * crawler instance. It can be used for persisting in-memory data or other
 	 * finalization tasks.

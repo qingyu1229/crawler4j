@@ -47,7 +47,7 @@ public class BasicCrawlController {
 		 * be initiated for crawling.
 		 */
 		int numberOfCrawlers = Integer.parseInt(args[1]);
-
+		
 		CrawlConfig config = new CrawlConfig();
 
 		config.setCrawlStorageFolder(crawlStorageFolder);

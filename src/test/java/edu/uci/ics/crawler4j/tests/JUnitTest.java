@@ -18,7 +18,6 @@ public class JUnitTest {
 		int numberOfCrawlers = 7;  
 		CrawlConfig config = new CrawlConfig();  
 		config.setCrawlStorageFolder(crawlStorageFolder);  
-
 		PageFetcher pageFetcher = new PageFetcher(config); 
 		RobotstxtConfig robotstxtConfig = new RobotstxtConfig(); 
 		
@@ -26,14 +25,12 @@ public class JUnitTest {
 		
 		try {
 			CrawlController controller = new CrawlController(config, pageFetcher, robotstxtServer);
-			controller.addSeed("http://www.88152.com");  
-			controller.addSeed("http://jichuang.huangye88.com/");  
+			controller.addSeed("http://www.1688.com");  
 			
 			controller.start(MyCrawler.class, numberOfCrawlers);  
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
 	}
-
 }

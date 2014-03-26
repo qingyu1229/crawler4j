@@ -86,9 +86,9 @@ public class WebURL implements Serializable {
 
 		int domainStartIdx = url.indexOf("//") + 2;
 		int domainEndIdx = url.indexOf('/', domainStartIdx);
-		domain = url.substring(domainStartIdx, domainEndIdx);
+		domain = url.substring(domainStartIdx, domainEndIdx);//提取到完整的主域名（www.**.com）
 		subDomain = "";
-		String[] parts = domain.split("\\.");
+		String[] parts = domain.split("\\.");//将主域名按"."分割
 		if (parts.length > 2) {
 			domain = parts[parts.length - 2] + "." + parts[parts.length - 1];
 			int limit = 2;

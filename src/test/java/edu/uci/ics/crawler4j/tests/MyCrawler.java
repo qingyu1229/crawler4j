@@ -1,41 +1,18 @@
 package edu.uci.ics.crawler4j.tests;
 
-import edu.uci.ics.crawler4j.crawler.CrawlController;
+import java.util.List;
+import java.util.regex.Pattern;
+
 import edu.uci.ics.crawler4j.crawler.Page;
 import edu.uci.ics.crawler4j.crawler.WebCrawler;
+import edu.uci.ics.crawler4j.parser.HtmlParseData;
 import edu.uci.ics.crawler4j.url.WebURL;
 
-
 public class MyCrawler extends WebCrawler{
-	
-
-	
-	
-	@Override
-	public void init(int myId, CrawlController crawlController) {
-		// TODO Auto-generated method stub
-		super.init(myId, crawlController);
-	}
-
-	@Override
-	protected void handlePageStatusCode(WebURL webUrl, int statusCode,
-			String statusDescription) {
-		// TODO Auto-generated method stub
-		super.handlePageStatusCode(webUrl, statusCode, statusDescription);
-	}
-
-	@Override
-	public Thread getThread() {
-		// TODO Auto-generated method stub
-		return super.getThread();
-	}
-
-	@Override
-	public boolean isNotWaitingForNewURLs() {
-		// TODO Auto-generated method stub
-		return super.isNotWaitingForNewURLs();
-	}
-
+	private final static Pattern FILTERS = Pattern.compile(".*(\\.(css|js|bmp|gif|jpe?g" 
+            + "|png|tiff?|mid|mp2|mp3|mp4"
+            + "|wav|avi|mov|mpeg|ram|m4v|pdf" 
+            + "|rm|smil|wmv|swf|wma|zip|rar|gz))$");
 	@Override
 	public void onStart() {
 		// TODO Auto-generated method stub
@@ -43,38 +20,27 @@ public class MyCrawler extends WebCrawler{
 	}
 
 	@Override
-	public void onBeforeExit() {
-		// TODO Auto-generated method stub
-		super.onBeforeExit();
-	}
-
-	@Override
-	public void run() {
-		// TODO Auto-generated method stub
-		super.run();
-	}
-
-	@Override
 	public boolean shouldVisit(WebURL url) {
 		// TODO Auto-generated method stub
-		return super.shouldVisit(url);
+		String href = url.getURL().toLowerCase();
+        return !FILTERS.matcher(href).matches() ;
 	}
 
 	@Override
 	public void visit(Page page) {
-		// TODO Auto-generated method stub
-		super.visit(page);
+		String url = page.getWebURL().getURL();
+        System.out.println("URL: " + url);
+
+        if (page.getParseData() instanceof HtmlParseData) {
+                HtmlParseData htmlParseData = (HtmlParseData) page.getParseData();
+                String text = htmlParseData.getText();
+                String html = htmlParseData.getHtml();
+                List<WebURL> links = htmlParseData.getOutgoingUrls();
+
+                System.out.println("Text length: " + text.length());
+                System.out.println("Html length: " + html.length());
+                System.out.println("Number of outgoing links: " + links.size());
+        }
 	}
 
-	@Override
-	public void setThread(Thread myThread) {
-		// TODO Auto-generated method stub
-		super.setThread(myThread);
-	}
-
-	public static void main(String[] args) {
-		
-		
-		
-	}
 }

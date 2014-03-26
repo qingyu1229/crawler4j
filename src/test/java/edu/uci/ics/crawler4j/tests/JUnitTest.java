@@ -26,7 +26,6 @@ public class JUnitTest {
 		
 		try {
 			CrawlController controller = new CrawlController(config, pageFetcher, robotstxtServer);
-			controller.addSeed("http://www.jiajmh.com/company.htm");  
 			controller.addSeed("http://www.88152.com");  
 			controller.addSeed("http://jichuang.huangye88.com/");  
 			

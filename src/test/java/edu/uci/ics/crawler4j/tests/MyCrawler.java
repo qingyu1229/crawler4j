@@ -26,12 +26,14 @@ public class MyCrawler extends WebCrawler{
 	public boolean shouldVisit(WebURL url) {
 		// TODO Auto-generated method stub
 		String href = url.getURL().toLowerCase();
-        return !FILTERS.matcher(href).matches()&&href.startsWith("http://shop") ;
+        //return !FILTERS.matcher(href).matches()&&href.startsWith("http://shop")&&href.endsWith("contactinfo.htm") ;
+        return !FILTERS.matcher(href).matches() ;
 	}
 
 	@Override
 	public void visit(Page page) {
 		String url = page.getWebURL().getURL();
+		
 		count++;
         System.out.println("URL: " + url);
         System.out.println("第"+count+"个网站");
@@ -41,6 +43,7 @@ public class MyCrawler extends WebCrawler{
                 String html = htmlParseData.getHtml();
                 List<WebURL> links = htmlParseData.getOutgoingUrls();
                 String title=htmlParseData.getTitle();
+                
                 System.out.println("Title:"+title);
                 
                 System.out.println("Text length: " + text.length());
